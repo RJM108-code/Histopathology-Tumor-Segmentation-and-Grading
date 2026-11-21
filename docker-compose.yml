@@ -1,0 +1,14 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      # Host assigns PORT at runtime; 8000 is the local default.
+      PORT: 8000
+    volumes:
+      # lets you drop in new weights without rebuilding the image
+      - ./backend/models:/app/backend/models:ro
+    restart: unless-stopped
